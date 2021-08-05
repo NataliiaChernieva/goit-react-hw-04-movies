@@ -1,25 +1,25 @@
-import { Switch, Route, NavLink } from 'react-router-dom';
 import './App.css';
+//import { useState } from 'react';
+import { Switch, Route } from 'react-router-dom';
 import Home from './views/Home';
 import Movies from './views/Movies';
+import MovieInfo from './views/MovieInfo';
 import NotFound from './views/NotFound';
+import Container from './components/Container/Container.jsx';
+import Navigation from './components/Navigation/Navigation.jsx';
 
 const App = () => (
-  <>
-    <ul>
-      <li><NavLink exact to='/'className="NavLink" activeClassName="NavLink--active">Home</NavLink></li>
-      <li><NavLink to='/movies'className="NavLink" activeClassName="NavLink--active">Movies</NavLink></li>
-    </ul>
-
+  <Container>
+    <header>
+      <Navigation />
+    </header>
     <Switch>
-      <Route exact path='/' component={Home} />
-      <Route path='/movies' component={Movies} />
-      <Route component={NotFound}/>
+      <Route exact path="/" component={Home} />
+      <Route exact path="/movies" component={Movies} />
+      <Route path="/movies/:movieId" component={MovieInfo} />
+      <Route component={NotFound} />
     </Switch>
-  </>
+  </Container>
 );
-
-  
-
 
 export default App;
