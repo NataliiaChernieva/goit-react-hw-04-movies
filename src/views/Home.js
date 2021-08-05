@@ -15,12 +15,15 @@ const Home = () => {
   return (
     <>
       <PageHeading>Trending today</PageHeading>
-      {movies &&
-        movies.map(movie => (
-          <li key={movie.id}>
-            <Link to={`movies/${movie.id}`}>{movie.title}</Link>
-          </li>
-        ))}
+      {movies && (
+        <ul>
+          {movies.map(movie => (
+            <li key={movie.id}>
+              <Link to={`movies/${movie.id}`}>{movie.title}</Link>
+            </li>
+          ))}
+        </ul>
+      )}
     </>
   );
 };

@@ -32,7 +32,7 @@ export async function featchMovieInSearch(movieName) {
 export async function featchMovieInfo(movieId) {
   try {
     const response = await axios.get(`/movie/${movieId}?api_key=${AUTH_TOKEN}`);
-    console.log('response :>> ', response.data);
+    // console.log('response :>> ', response.data);
     return response.data;
   } catch (error) {
     alert(error.message);
@@ -44,8 +44,8 @@ export async function featchMovieCast(movieId) {
     const response = await axios.get(
       `/movie/${movieId}/credits?api_key=${AUTH_TOKEN}`,
     );
-    console.log('response :>> ', response.data.results);
-    return response.data.results;
+    console.log('cast :>> ', response.data.cast);
+    return response.data.cast;
   } catch (error) {
     alert(error.message);
   }

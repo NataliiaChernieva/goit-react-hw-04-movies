@@ -5,14 +5,15 @@ import Home from './views/Home';
 import Movies from './views/Movies';
 import MovieInfo from './views/MovieInfo';
 import NotFound from './views/NotFound';
+import { Header } from './components/Navigation/Navigation.styled.jsx';
 import Container from './components/Container/Container.jsx';
 import Navigation from './components/Navigation/Navigation.jsx';
 
 const App = () => (
   <Container>
-    <header>
+    <Header>
       <Navigation />
-    </header>
+    </Header>
     <Switch>
       <Route exact path="/" component={Home} />
       <Route exact path="/movies" component={Movies} />

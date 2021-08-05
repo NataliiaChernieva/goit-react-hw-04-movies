@@ -1,15 +1,23 @@
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import {
+  NavLink,
+  Switch,
+  Route,
+  useParams,
+  useRouteMatch,
+} from 'react-router-dom';
 import * as api from '../services/movies-api';
+import Cast from './Cast';
+import Reviews from './Reviews';
 
 const MovieInfo = () => {
   const [movie, setMovie] = useState(null);
-
+  const { url, path } = useRouteMatch();
   const { movieId } = useParams();
 
   useEffect(() => {
     api.featchMovieInfo(movieId).then(data => {
-      console.log('data :>> ', data);
+      //   console.log('data :>> ', data);
       setMovie(data);
     });
   }, [movieId]);
@@ -23,7 +31,7 @@ const MovieInfo = () => {
           <ul>
             <li>
               <h2>
-                {movie.original_title}({movie.release_date}.getFullYear())
+                {movie.original_title}({movie.release_date})
               </h2>
             </li>
             <li>
@@ -42,6 +50,23 @@ const MovieInfo = () => {
               </ul>
             </li>
           </ul>
+
+          <hr />
+
+          <p>Additional Informaion</p>
+          <ul>
+            <li>
+              <NavLink to={`${url}/cast`}>Cast</NavLink>
+            </li>
+            <li>
+              <NavLink to={`${url}/reviews`}>Reviews</NavLink>
+            </li>
+          </ul>
+
+          <Switch>
+            <Route exact path={`${path}/cast`} component={Cast} />
+            <Route exact path={`${path}/reviews`} component={Reviews} />
+          </Switch>
         </>
       )}
     </>
