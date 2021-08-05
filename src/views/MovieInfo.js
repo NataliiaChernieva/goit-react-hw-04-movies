@@ -9,11 +9,13 @@ import {
 import * as api from '../services/movies-api';
 import Cast from './Cast';
 import Reviews from './Reviews';
+import defaultImg from '../defaultImg/noposter.png';
 
 const MovieInfo = () => {
   const [movie, setMovie] = useState(null);
   const { url, path } = useRouteMatch();
   const { movieId } = useParams();
+  const imgBasePath = 'https://image.tmdb.org/t/p/w500';
 
   useEffect(() => {
     api.featchMovieInfo(movieId).then(data => {
@@ -27,7 +29,16 @@ const MovieInfo = () => {
       {movie && (
         <>
           <button type="button">Go back</button>
-          <img src={movie.poster_path} alt={movie.original_title}></img>
+          <img
+            src={
+              imgBasePath + movie.poster_path !==
+              'https://image.tmdb.org/t/p/w500null'
+                ? imgBasePath + movie.poster_path
+                : defaultImg
+            }
+            alt={movie.original_title}
+            width="300"
+          ></img>
           <ul>
             <li>
               <h2>
