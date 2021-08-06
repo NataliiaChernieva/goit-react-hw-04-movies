@@ -44,7 +44,7 @@ export async function featchMovieCast(movieId) {
     const response = await axios.get(
       `/movie/${movieId}/credits?api_key=${AUTH_TOKEN}`,
     );
-    console.log('cast :>> ', response.data.cast);
+    // console.log('cast :>> ', response.data.cast);
     return response.data.cast;
   } catch (error) {
     alert(error.message);
@@ -56,7 +56,7 @@ export async function featchMovieRewiews(movieId) {
     const response = await axios.get(
       `/movie/${movieId}/reviews?api_key=${AUTH_TOKEN}`,
     );
-    console.log('response :>> ', response.data.results);
+    // console.log('Rewiews :>> ', response.data.results);
     return response.data.results;
   } catch (error) {
     alert(error.message);

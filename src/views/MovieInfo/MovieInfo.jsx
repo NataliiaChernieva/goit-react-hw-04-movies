@@ -5,16 +5,19 @@ import {
   Route,
   useParams,
   useRouteMatch,
+  useHistory,
 } from 'react-router-dom';
-import * as api from '../services/movies-api';
-import Cast from './Cast';
-import Reviews from './Reviews';
-import defaultImg from '../defaultImg/noposter.png';
+import * as api from '../../services/movies-api';
+import Cast from '../Cast/Cast';
+import Reviews from '../Reviews';
+import defaultImg from '../../defaultImg/noposter.png';
+import { LeftSide, RightSide, Movie, Genres,Button} from './MovieInfo.styled';
 
 const MovieInfo = () => {
   const [movie, setMovie] = useState(null);
   const { url, path } = useRouteMatch();
   const { movieId } = useParams();
+  const history = useHistory();
   const imgBasePath = 'https://image.tmdb.org/t/p/w500';
 
   useEffect(() => {
@@ -24,22 +27,30 @@ const MovieInfo = () => {
     });
   }, [movieId]);
 
+  const handleGoBack = () => {
+    //history.push()
+  }
+
   return (
     <>
       {movie && (
         <>
-          <button type="button">Go back</button>
-          <img
-            src={
-              imgBasePath + movie.poster_path !==
-              'https://image.tmdb.org/t/p/w500null'
-                ? imgBasePath + movie.poster_path
-                : defaultImg
-            }
-            alt={movie.original_title}
-            width="300"
-          ></img>
-          <ul>
+        <Button type="button" onClick={handleGoBack}>Go back</Button>
+        <Movie>
+          <LeftSide>
+            <img
+              src={
+                imgBasePath + movie.poster_path !==
+                'https://image.tmdb.org/t/p/w500null'
+                  ? imgBasePath + movie.poster_path
+                  : defaultImg
+              }
+              alt={movie.original_title}
+              width="300"
+            ></img>
+          </LeftSide>
+
+          <RightSide>
             <li>
               <h2>
                 {movie.original_title}({movie.release_date})
@@ -54,16 +65,16 @@ const MovieInfo = () => {
             </li>
             <li>
               <h3>Genres</h3>
-              <ul>
+              <Genres>
                 {movie.genres.map(ganre => (
                   <li key={ganre.id}>{ganre.name}</li>
                 ))}
-              </ul>
+              </Genres>
             </li>
-          </ul>
+          </RightSide>
+        </Movie>
 
-          <hr />
-
+          
           <p>Additional Informaion</p>
           <ul>
             <li>

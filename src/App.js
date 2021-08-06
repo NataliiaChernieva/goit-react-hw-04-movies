@@ -3,7 +3,7 @@ import './App.css';
 import { Switch, Route } from 'react-router-dom';
 import Home from './views/Home';
 import Movies from './views/Movies';
-import MovieInfo from './views/MovieInfo';
+import MovieInfo from './views/MovieInfo/MovieInfo.jsx';
 import NotFound from './views/NotFound';
 import { Header } from './components/Navigation/Navigation.styled.jsx';
 import Container from './components/Container/Container.jsx';

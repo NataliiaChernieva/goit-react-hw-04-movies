@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import * as api from '../services/movies-api';
-import defaultImg from '../defaultImg/default-img.jpg';
+import * as api from '../../services/movies-api';
+import defaultImg from '../../defaultImg/default-img.jpg';
+import { CurrentCast } from './Cast.styled';
 
 const Cast = () => {
   const [cast, setCast] = useState(null);
@@ -16,7 +17,7 @@ const Cast = () => {
   return (
     <>
       {cast && (
-        <ul>
+        <CurrentCast>
           {cast.map(actor => (
             <li key={actor.id}>
               <img
@@ -33,7 +34,7 @@ const Cast = () => {
               <p>Character: {actor.character}</p>
             </li>
           ))}
-        </ul>
+        </CurrentCast>
       )}
     </>
   );
