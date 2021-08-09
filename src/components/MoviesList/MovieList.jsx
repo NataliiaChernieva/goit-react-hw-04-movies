@@ -11,7 +11,13 @@ export default function MovieList({ movies }) {
               <MovieItem key={id}>
                 <Link to={{
                   pathname: `movies/${id}`,
-                  state: { from: location },}} >
+                  state: {
+                    from: {
+                      location,
+                      label: "Go back to all movies"
+                    },
+                  },
+                }} >
                    <MovieImage src={imgBasePath + poster_path} alt={title}></MovieImage>
                    <MovieTitle>{title}</MovieTitle>
                 </Link>

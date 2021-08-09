@@ -42,14 +42,14 @@ const MovieInfo = () => {
   },[location.state])
 
   const handleGoBack = () => {
-    history.push(routerState.current?.params ?? '/');
+    history.push(location?.state?.from?.location ?? '/');
   }
 
   return (
     <>
       {movie && (
         <>
-        <Button type="button" onClick={handleGoBack}>Go back</Button>
+          <Button type="button" onClick={handleGoBack}>{location?.state?.from?.label ?? "Go back"}</Button>
         <Movie>
           <LeftSide>
             <img
