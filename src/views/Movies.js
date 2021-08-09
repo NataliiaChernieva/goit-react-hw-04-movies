@@ -28,7 +28,7 @@ const Movies = () => {
     <>
       <Form onSubmit={inputValueHandler} />
       <Toaster />
-      {movies && <MovieList />}
+      {movies && <MovieList movies={movies} />}
     </>
   );
 };
