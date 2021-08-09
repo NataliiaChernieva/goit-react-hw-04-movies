@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import * as api from '../services/movies-api';
+import * as api from '../../services/movies-api';
+import { ReviewsList }  from './Reviews.styled';
 
 const Reviews = () => {
   const [reviews, setReviews] = useState(null);
@@ -13,7 +14,7 @@ const Reviews = () => {
   return (
     <>
       {reviews && (
-        <ul>
+        <ReviewsList>
           {reviews.map(review => (
             <li>
               <p>
@@ -22,7 +23,7 @@ const Reviews = () => {
               <p>{review.content}</p>
             </li>
           ))}
-        </ul>
+        </ReviewsList>
       )}
     </>
   );

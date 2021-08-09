@@ -1,6 +1,8 @@
 import styled from '@emotion/styled';
 
-export const CurrentForm = styled.form``;
+export const CurrentForm = styled.form`
+margin-top: 20px;
+margin-bottom: 30px;`;
 
 export const Input = styled.input``;
 

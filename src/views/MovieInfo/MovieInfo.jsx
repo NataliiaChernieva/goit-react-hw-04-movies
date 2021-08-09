@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, lazy, Suspense } from 'react';
 import {
   NavLink,
   Switch,
@@ -6,18 +6,25 @@ import {
   useParams,
   useRouteMatch,
   useHistory,
-} from 'react-router-dom';
+  useLocation,
+  } from 'react-router-dom';
 import * as api from '../../services/movies-api';
-import Cast from '../Cast/Cast';
-import Reviews from '../Reviews';
 import defaultImg from '../../defaultImg/noposter.png';
 import { LeftSide, RightSide, Movie, Genres,Button} from './MovieInfo.styled';
 
+const Cast = lazy(() => import('../Cast/Cast' /* webpackChunkName: "cast" */));
+const Reviews = lazy(() => import('../Reviews/Reviews' /* webpackChunkName: "reviews" */));
+
 const MovieInfo = () => {
   const [movie, setMovie] = useState(null);
+
+  const routerState = useRef(null);
   const { url, path } = useRouteMatch();
   const { movieId } = useParams();
   const history = useHistory();
+  console.log('history :>> ', history);
+  const location = useLocation();
+  console.log('location :>> ', location);
   const imgBasePath = 'https://image.tmdb.org/t/p/w500';
 
   useEffect(() => {
@@ -27,8 +34,15 @@ const MovieInfo = () => {
     });
   }, [movieId]);
 
+  useEffect(() => {
+    if (!routerState.current) {
+      routerState.current = location.state;
+      console.log('routerState.current :>> ',routerState.current);
+    }    
+  },[location.state])
+
   const handleGoBack = () => {
-    //history.push()
+    history.push(routerState.current?.params ?? '/');
   }
 
   return (
@@ -53,7 +67,7 @@ const MovieInfo = () => {
           <RightSide>
             <li>
               <h2>
-                {movie.original_title}({movie.release_date})
+                {movie.original_title}n
               </h2>
             </li>
             <li>
@@ -84,11 +98,14 @@ const MovieInfo = () => {
               <NavLink to={`${url}/reviews`}>Reviews</NavLink>
             </li>
           </ul>
-
-          <Switch>
-            <Route exact path={`${path}/cast`} component={Cast} />
-            <Route exact path={`${path}/reviews`} component={Reviews} />
+          
+          <Suspense fallback ={<h1>Loading...</h1>}>
+            <Switch>
+              <Route exact path={`${path}/cast`} component={Cast} />
+              <Route exact path={`${path}/reviews`} component={Reviews} />
           </Switch>
+          </Suspense>
+          
         </>
       )}
     </>

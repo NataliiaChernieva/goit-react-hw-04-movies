@@ -22,4 +22,5 @@ display: flex;
 
 export const Button=styled.button`
 margin-top: 14px;
-margin-left: 12px;`;
+margin-left: 12px;
+margin-bottom: 10px;`;
