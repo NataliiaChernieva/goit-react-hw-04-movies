@@ -16,7 +16,7 @@ const Reviews = () => {
       {reviews && (
         <ReviewsList>
           {reviews.map(review => (
-            <li>
+            <li key={review.author}>
               <p>
                 <b>{review.author}</b>
               </p>

@@ -10,7 +10,7 @@ export async function featchPopularMovies() {
     const response = await axios.get(
       `/trending/movie/day?api_key=${AUTH_TOKEN}`,
     );
-    console.log('result :>> ', response.data.results);
+    // console.log('result :>> ', response.data.results);
     return response.data.results;
   } catch (error) {
     alert(error.message);
@@ -22,7 +22,7 @@ export async function featchMovieInSearch(movieName) {
     const response = await axios.get(
       `/search/movie?api_key=${AUTH_TOKEN}&query=${movieName}`,
     );
-    console.log('result :>> ', response.data.results);
+    //console.log('result :>> ', response.data.results);
     return response.data.results;
   } catch (error) {
     alert(error.message);

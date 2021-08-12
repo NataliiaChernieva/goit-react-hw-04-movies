@@ -1,10 +1,13 @@
+import PropTypes from 'prop-types';
 import { useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 import { CurrentForm, Input, Button } from './Form.styled';
 
+
 export default function Form({onSubmit}) {
     const [value, setValue] = useState('');
-
+   
+    
     const handleInputValue = (e) => {
         setValue(e.target.value.toLowerCase());
     }
@@ -35,3 +38,7 @@ export default function Form({onSubmit}) {
     )
     
 };
+
+Form.propTypes = {
+    onSubmit: PropTypes.func.isRequired,
+}

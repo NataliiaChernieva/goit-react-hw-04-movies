@@ -22,7 +22,6 @@ const MovieInfo = () => {
   const { url, path } = useRouteMatch();
   const { movieId } = useParams();
   const history = useHistory();
-  console.log('history :>> ', history);
   const location = useLocation();
   console.log('location :>> ', location);
   const imgBasePath = 'https://image.tmdb.org/t/p/w500';
@@ -34,15 +33,17 @@ const MovieInfo = () => {
     });
   }, [movieId]);
 
-  useEffect(() => {
-    if (!routerState.current) {
-      routerState.current = location.state;
-      console.log('routerState.current :>> ',routerState.current);
-    }    
-  },[location.state])
+  // useEffect(() => {
+  //   if (!routerState.current) {
+  //     routerState.current = location.state;
+  //     console.log('routerState.current :>> ',routerState.current);
+  //   }    
+  // },[])
 
   const handleGoBack = () => {
-    history.push(location?.state?.from?.location ?? '/');
+    history.push( location.state?.params ?? '/');
+    // history.push(location.state.from ?? '/movies');
+    // history.push( routerState.current?.params ?? '/');
   }
 
   return (
@@ -92,10 +93,16 @@ const MovieInfo = () => {
           <p>Additional Informaion</p>
           <ul>
             <li>
-              <NavLink to={`${url}/cast`}>Cast</NavLink>
+              <NavLink to={{
+                pathname: `${url}/cast`,
+                state: { from: location?.state?.from },
+              }} > Cast</NavLink>
             </li>
             <li>
-              <NavLink to={`${url}/reviews`}>Reviews</NavLink>
+              <NavLink to={{
+                pathname: `${url}/reviews`,
+                state: { from: location?.state?.from },
+              }} > Reviews</NavLink>
             </li>
           </ul>
           
