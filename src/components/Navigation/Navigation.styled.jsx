@@ -2,13 +2,13 @@ import styled from '@emotion/styled';
 
 export const CurrentNavigation = styled.nav`
 // display: flex;
-// background-color:#3d3939;
-color: #ffffff;
+background-color:#3d3939;
 text-transform: uppercase;
-padding: 10px 20px;
+padding: 10px 30px;
 font-weight: 500;
 & a{
      text-decoration: none;
+     color:#d7d7d7;
     }
 & :not(:last-child){
     margin-right: 20px;

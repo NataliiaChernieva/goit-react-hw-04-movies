@@ -20,19 +20,22 @@ const NotFound = lazy(() =>
 );
 
 const App = () => (
-  <Container>
+  <>
     <Header>
       <Navigation />
     </Header>
-    <Suspense fallback={<h1>Loading...</h1>}>
-      <Switch>
-        <Route exact path="/" component={Home} />
-        <Route exact path="/movies" component={Movies} />
-        <Route path="/movies/:movieId" component={MovieInfo} />
-        <Route component={NotFound} />
-      </Switch>
-    </Suspense>
-  </Container>
+
+    <Container>
+      <Suspense fallback={<h1>Loading...</h1>}>
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/movies" component={Movies} />
+          <Route path="/movies/:movieId" component={MovieInfo} />
+          <Route component={NotFound} />
+        </Switch>
+      </Suspense>
+    </Container>
+  </>
 );
 
 export default App;
