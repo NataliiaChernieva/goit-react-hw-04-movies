@@ -22,7 +22,7 @@ const MovieInfo = () => {
   const { movieId } = useParams();
   const history = useHistory();
   const location = useLocation();
-  console.log('location :>> ', location);
+  //console.log('location :>> ', location);
   const imgBasePath = 'https://image.tmdb.org/t/p/w500';
 
   useEffect(() => {

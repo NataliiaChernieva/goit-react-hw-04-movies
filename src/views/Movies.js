@@ -4,7 +4,6 @@ import toast, { Toaster } from 'react-hot-toast';
 import Form from '../components/Form/Form.jsx';
 import * as api from '../services/movies-api';
 import MovieList from '../components/MoviesList/MovieList';
-// import { CurrentMovieList, MovieItem, MovieImage, MovieTitle } from '../components/MoviesList/MovieList.styled.jsx';
 
 const Movies = () => {
   // const [movieName, setMovieName] = useState('');
@@ -14,7 +13,6 @@ const Movies = () => {
   console.log(`location in movie`, location);
   const params = new URLSearchParams(location.search);
   const searchQuery = params.get('query') ?? '';
-  // const imgBasePath = 'https://image.tmdb.org/t/p/w500';
 
   useEffect(() => {
     if (searchQuery === '') {
@@ -42,21 +40,6 @@ const Movies = () => {
       <Form onSubmit={inputValueHandler} />
       <Toaster />
       {movies && <MovieList movies={movies} />}
-      {/* <CurrentMovieList>
-          {movies && movies.map(({id, poster_path, title}) => (
-              <MovieItem key={id}>
-                <Link to={{
-                  pathname: `movies/${id}`,
-                  state: {
-                    params: `movies/?query=${query}`
-                  },
-                }} >
-                   <MovieImage src={imgBasePath + poster_path} alt={title}></MovieImage>
-                   <MovieTitle>{title}</MovieTitle>
-                </Link>
-            </MovieItem>
-          ))}
-        </CurrentMovieList > */}
     </>
   );
 };
