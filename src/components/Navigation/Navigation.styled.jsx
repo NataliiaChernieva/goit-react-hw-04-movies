@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 
 export const CurrentNavigation = styled.nav`
 // display: flex;
+width:100%;
 background-color:#3d3939;
 text-transform: uppercase;
 padding: 10px 30px;
@@ -17,7 +18,6 @@ font-weight: 500;
 
 export const Header = styled.header`
 height: 40px;
-border-bottom: 2px solid #010101;
 `;
 
 

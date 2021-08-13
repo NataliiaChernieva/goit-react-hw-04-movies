@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, lazy, Suspense } from 'react';
+import { useState, useEffect, lazy, Suspense } from 'react';
 import {
   NavLink,
   Switch,
@@ -10,7 +10,7 @@ import {
   } from 'react-router-dom';
 import * as api from '../../services/movies-api';
 import defaultImg from '../../defaultImg/noposter.png';
-import { LeftSide, RightSide, Movie, Genres,Button} from './MovieInfo.styled';
+import { LeftSide, RightSide, Movie, Genres,Button,  MovieImg} from './MovieInfo.styled';
 
 const Cast = lazy(() => import('../Cast/Cast' /* webpackChunkName: "cast" */));
 const Reviews = lazy(() => import('../Reviews/Reviews' /* webpackChunkName: "reviews" */));
@@ -18,7 +18,6 @@ const Reviews = lazy(() => import('../Reviews/Reviews' /* webpackChunkName: "rev
 const MovieInfo = () => {
   const [movie, setMovie] = useState(null);
 
-  const routerState = useRef(null);
   const { url, path } = useRouteMatch();
   const { movieId } = useParams();
   const history = useHistory();
@@ -33,17 +32,9 @@ const MovieInfo = () => {
     });
   }, [movieId]);
 
-  // useEffect(() => {
-  //   if (!routerState.current) {
-  //     routerState.current = location.state;
-  //     console.log('routerState.current :>> ',routerState.current);
-  //   }    
-  // },[])
-
   const handleGoBack = () => {
-    history.push( location.state?.params ?? '/');
-    // history.push(location.state.from ?? '/movies');
-    // history.push( routerState.current?.params ?? '/');
+    history.push(location.state.from.location ?? '/movies');
+   
   }
 
   return (
@@ -53,7 +44,7 @@ const MovieInfo = () => {
           <Button type="button" onClick={handleGoBack}>{location?.state?.from?.label ?? "Go back"}</Button>
         <Movie>
           <LeftSide>
-            <img
+            <MovieImg
               src={
                 imgBasePath + movie.poster_path !==
                 'https://image.tmdb.org/t/p/w500null'
@@ -62,7 +53,7 @@ const MovieInfo = () => {
               }
               alt={movie.original_title}
               width="300"
-            ></img>
+            ></MovieImg>
           </LeftSide>
 
           <RightSide>
